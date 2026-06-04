@@ -1,0 +1,53 @@
+// Base Variables (Layout & Typography)
+$font-family-base: sans-serif;
+$line-height-base: 1.5;
+$site-max-width: 1200px;
+$site-padding: 16px;
+
+// 7 Core Theme Colors (Mapped to Customizer slots 1-7)
+$themeColor1: #159A9C; // 1
+$themeColor1-dark: darken($themeColor1, 15%);
+
+$themeColor2: #002333; // 3
+$themeColor2-dark: darken($themeColor2, 15%);
+
+$themeColor3: #B4BEC9; // lightgray
+$themeColor4: #88929d; // darkgray
+$themeColor5: #DEEFE7; // 6
+
+$text-color: #333333; // 2
+$dark: #343a40; // 7
+
+// Universal Colors
+$black: #000000;
+$white: #ffffff;
+$border-color: $themeColor3;
+
+// Form & Button Variables
+$input-bg: $white;
+$input-bg-disabled: $themeColor5;
+$input-color: $text-color;
+$input-border-color: $border-color;
+$input-border-color-focus: $themeColor1;
+$input-box-shadow-focus: 0 0 0 3px rgba($themeColor1, 0.25);
+$input-placeholder-color: lighten($text-color, 20%);
+$input-height: calc(1.5em + 12px + 2px);
+$input-padding-y: 6px;
+$input-padding-x: 12px;
+$input-font-size: 16px;
+$input-line-height: 1.5;
+$input-border-radius: 4px;
+$input-transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+$btn-padding-y: 6px;
+$btn-padding-x: 12px;
+$btn-font-size: 16px;
+$btn-line-height: 1.5;
+$btn-border-radius: 4px;
+$btn-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+
+$btn-primary-bg: $themeColor1;
+$btn-primary-border: $themeColor1;
+$btn-primary-color: $white;
+$btn-primary-hover-bg: darken($themeColor1, 10%);
+$btn-primary-hover-border: darken($themeColor1, 10%);

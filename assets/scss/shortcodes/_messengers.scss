@@ -1,0 +1,51 @@
+// Стили блока ссылок на мессенджеры (шорткод [messengers])
+// Список в один ряд, кликабельные иконки
+@use '../variables' as *;
+
+.messenger-links {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+
+    &__item {
+        margin: 0;
+    }
+
+    &__link {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+
+    &__icon {
+        display: block;
+        width: 32px;
+        height: 32px;
+        object-fit: contain;
+    }
+
+    &__placeholder {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 0 8px;
+        height: 32px;
+        font-size: 12px;
+        background: $themeColor5;
+        box-shadow: 0 0 10px rgba($black, 0.1);
+        border-radius: 4px;
+        color: $text-color;
+        white-space: nowrap;
+    }
+}

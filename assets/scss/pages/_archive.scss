@@ -1,0 +1,75 @@
+// Архивная страница блога (список записей)
+@use '../variables' as *;
+
+.archive,
+.blog {
+	.page-header {
+		// Заголовок архива (например, название рубрики/даты)
+	}
+
+	.site-main {
+		// Список записей
+	}
+
+	.entry-header,
+	.entry-title,
+	.entry-content {
+		// Карточка/превью записи в списке
+	}
+}
+
+// Category Description Read More
+.archive-description-wrapper {
+	position: relative;
+	margin-top: 30px;
+	margin-bottom: 30px;
+
+	.archive-description-inner {
+		position: relative;
+		overflow: hidden;
+		transition: max-height 0.5s ease;
+
+		&.collapsed {
+			max-height: 120px; // Initial visible height
+
+			&::after {
+				content: '';
+				position: absolute;
+				bottom: 0;
+				left: 0;
+				width: 100%;
+				height: 60px;
+				background: linear-gradient(to bottom, rgba(255, 255, 255, 0), rgba(255, 255, 255, 1));
+				pointer-events: none;
+			}
+		}
+
+		&.expanded {
+			// max-height handled by JS
+
+			&::after {
+				display: none;
+			}
+		}
+	}
+
+	.archive-description-toggle {
+		display: block; // Changed from none to block via JS if needed, but initially handled by JS
+		margin: 10px auto 0;
+		background: none;
+		border: none;
+		color: $themeColor2; // Match screenshot red color (Bootstrap danger usually)
+		font-weight: bold;
+		cursor: pointer;
+		padding: 5px 10px;
+		font-size: 16px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+
+		&:focus {
+			outline: none;
+		}
+	}
+}

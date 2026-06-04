@@ -1,0 +1,169 @@
+// WooCommerce Styles
+// Utilizing --woo-color CSS variable for main theme integration.
+
+@use '../variables' as *;
+
+.woocommerce {
+
+    // Primary Button
+    #respond input#submit.alt,
+    a.button.alt,
+    button.button.alt,
+    input.button.alt {
+        background-color: var(--woo-color, $themeColor1);
+        color: $white;
+        border-color: var(--woo-color, $themeColor1);
+
+        &:hover {
+            background-color: var(--woo-color, $themeColor1);
+            filter: brightness(0.9);
+            color: $white;
+        }
+    }
+
+    // Secondary Button / General Button
+    #respond input#submit,
+    a.button,
+    button.button,
+    input.button {
+        // Can optionally be styled if needed, keeping default for now
+        // or mapping to secondary theme color if requested later.
+    }
+
+    // Shop Loop Buttons
+    ul.products li.product .button {
+        background-color: var(--woo-color, $themeColor1);
+        color: $white;
+        border-color: var(--woo-color, $themeColor1);
+        margin-top: 10px; // Add some spacing
+
+        &:hover {
+            background-color: var(--woo-color, $themeColor1);
+            filter: brightness(0.9);
+            color: $white;
+        }
+    }
+
+    // Price
+    div.product p.price,
+    div.product span.price {
+        color: var(--woo-color, $themeColor1);
+    }
+
+    ul.products li.product .price {
+        color: var(--woo-color, $themeColor1);
+    }
+
+    // Sale Badge
+    span.onsale {
+        background-color: var(--woo-color, $themeColor1);
+        line-height: inherit; // Fix vertical alignment if needed
+        min-height: auto;
+    }
+
+    // Pagination
+    nav.woocommerce-pagination ul {
+        border-color: var(--woo-color, $themeColor1);
+
+        li {
+            border-right-color: var(--woo-color, $themeColor1);
+
+            span.current,
+            a:hover,
+            a:focus {
+                background: var(--woo-color, $themeColor1);
+                color: $white;
+            }
+        }
+    }
+
+    // Messages
+    .woocommerce-message,
+    .woocommerce-info {
+        border-top-color: var(--woo-color, $themeColor1);
+
+        &::before {
+            color: var(--woo-color, $themeColor1);
+        }
+    }
+
+    // Star Rating
+    .star-rating span {
+        color: var(--woo-color, $themeColor4); // Ideally gold, but user asked for centralized control
+        // If user wants distinct rating color, we can add another setting.
+        // For now, let's keep rating standard gold or stick to the requested single color?
+        // Usually ratings are gold. Let's comment this out to keep them gold by default
+        // unless explicitly asked to change.
+        // color: var(--woo-color);
+    }
+
+    // Quantity Input styling with +/- buttons
+    .quantity {
+        display: inline-flex;
+        align-items: center;
+        margin-right: 16px;
+
+        /* Hide number spinner */
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+            margin: 0;
+        }
+
+        input[type=number] {
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        .qty {
+            width: 48px;
+            height: 40px; // Match button height
+            text-align: center;
+            border: 1px solid $border-color;
+            border-left: 0;
+            border-right: 0;
+            padding: 0;
+            border-radius: 0;
+            -moz-appearance: textfield; // Firefox again just to be safe
+            appearance: textfield;
+
+            &:focus {
+                outline: none;
+                border-color: $border-color; // Prevent border color change on focus
+            }
+        }
+
+        button.minus,
+        button.plus {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            padding: 0;
+            border: 1px solid $border-color;
+            background-color: $themeColor5;
+            color: $text-color;
+            font-size: 19px;
+            line-height: 1;
+            font-weight: normal; // Ensure + and - are not bold
+            cursor: pointer;
+            transition: background-color 0.2s;
+
+            &:hover {
+                background-color: darken($themeColor5, 5%);
+            }
+
+            &:focus {
+                outline: none;
+                background-color: darken($themeColor5, 8%);
+            }
+        }
+
+        button.minus {
+            border-radius: 4px 0 0 4px;
+        }
+
+        button.plus {
+            border-radius: 0 4px 4px 0;
+        }
+    }
+}

@@ -1,0 +1,12 @@
+{
+  "name": "brainworks-theme",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build:styles": "sass assets/scss/style.scss style.css --style=expanded",
+    "watch:styles": "sass assets/scss/style.scss style.css --watch"
+  },
+  "devDependencies": {
+    "sass": "^1.69.0"
+  }
+}

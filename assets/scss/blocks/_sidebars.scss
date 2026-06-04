@@ -1,0 +1,136 @@
+// Области виджетов и шаблоны с боковыми колонками
+
+@use 'variables' as *;
+
+// Общие стили виджетов
+.widget {
+	margin-bottom: 24px;
+}
+
+.widget:last-child {
+	margin-bottom: 0;
+}
+
+.widget-title {
+	margin: 0 0 12px;
+	font-size: 16px;
+}
+
+// Контейнер контента с колонками
+.site-content {
+	width: 100%;
+	max-width: $site-max-width;
+	margin: 0 auto;
+	padding: 16px $site-padding;
+	display: grid;
+	gap: 24px;
+}
+
+// Левая колонка
+.site-content--sidebar-left {
+	grid-template-columns: 280px 1fr;
+}
+
+.site-content--sidebar-left .site-main {
+	min-width: 0;
+}
+
+// Правая колонка
+.site-content--sidebar-right {
+	grid-template-columns: 1fr 280px;
+}
+
+.site-content--sidebar-right .site-main {
+	min-width: 0;
+}
+
+// Обе колонки
+.site-content--sidebar-both {
+	grid-template-columns: 240px 1fr 240px;
+}
+
+.site-content--sidebar-both .site-main {
+	min-width: 0;
+}
+
+// Боковые панели
+.sidebar {
+	min-width: 0;
+	position: -webkit-sticky;
+	position: var(--sidebar-sticky, static);
+	align-self: start;
+	// Default "hidden" sticky state (effectively static behavior until scrolled way past)
+	// We use a large negative value so it doesn't stick until very late, effectively mimicking static.
+	top: calc(var(--sidebar-scroll-trigger, 200) * -1px);
+	margin-top: var(--sidebar-offset-xs, 20px);
+	transition: top 0.8s ease-in-out; // Slower smooth animation
+	z-index: 900; // Below header (usually 1000)
+
+	&.is-sticky-active {
+		// Apply actual sticky top position
+		top: calc(var(--sidebar-offset-xs, 20px) + var(--sidebar-sticky-offset-delta, 0px));
+	}
+
+
+	@media (min-width: 768px) {
+		margin-top: var(--sidebar-offset-sm, 20px);
+		// Update transition target for breakpoint
+		// If not active, it stays -150vh. If active, it updates to usage below.
+
+		&.is-sticky-active {
+			top: calc(var(--sidebar-offset-sm, 20px) + var(--sidebar-sticky-offset-delta, 0px));
+		}
+	}
+
+	@media (min-width: 992px) {
+		margin-top: var(--sidebar-offset-md, 20px);
+
+		&.is-sticky-active {
+			top: calc(var(--sidebar-offset-md, 20px) + var(--sidebar-sticky-offset-delta, 0px));
+		}
+	}
+
+	@media (min-width: 1200px) {
+		margin-top: var(--sidebar-offset-lg, 20px);
+
+		&.is-sticky-active {
+			top: calc(var(--sidebar-offset-lg, 20px) + var(--sidebar-sticky-offset-delta, 0px));
+		}
+	}
+}
+
+
+
+.sidebar-left {
+	order: -1;
+}
+
+// .sidebar-right {}
+
+// Без сайдбара (на всю ширину)
+.site-content--full-width {
+	grid-template-columns: 1fr;
+}
+
+// Адаптив: на узких экранах колонки под контентом
+@media (max-width: 768px) {
+
+	// .site уже даёт $site-padding по бокам — убираем дублирование
+	.site-content {
+		padding-left: 0;
+		padding-right: 0;
+	}
+
+	.site-content--sidebar-left,
+	.site-content--sidebar-right {
+		grid-template-columns: 1fr;
+	}
+
+	.site-content--sidebar-both {
+		grid-template-columns: 1fr;
+	}
+
+	.sidebar-left {
+		order: 0;
+	}
+}

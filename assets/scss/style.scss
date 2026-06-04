@@ -1,0 +1,62 @@
+/*
+Theme Name: Brainworks
+Theme URI:
+Author: BrainWorks
+Author URI:
+Description: Минимальная голая тема для WordPress. Базовый каркас без лишней функциональности.
+Version: 1.0.0
+Requires at least: 5.0
+Tested up to: 6.4
+Requires PHP: 7.4
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Text Domain: brainworks
+*/
+
+/* Сборка: npm run build:styles → style.css в корне темы */
+
+@use 'variables' as *;
+@use 'mixins' as *;
+@use 'reset';
+@use 'base';
+@use 'typography';
+
+// Elements
+@use 'elements/forms';
+@use 'elements/lists';
+@use 'elements/tables';
+@use 'elements/buttons';
+@use 'elements/breadcrumbs';
+@use 'elements/scroll-to-top';
+@use 'elements/shiny-cta';
+@use 'elements/grid';
+
+// Blocks
+@use 'blocks/header';
+@use 'blocks/mobile-menu';
+@use 'blocks/footer';
+@use 'blocks/sidebars';
+@use 'blocks/widgets';
+@use 'blocks/post-navigation';
+@use 'blocks/related-posts';
+@use 'blocks/menus';
+@use 'blocks/posts';
+
+// Pages
+@use 'pages/single';
+@use 'pages/archive';
+@use 'pages/page';
+@use 'pages/auth';
+
+// Shortcodes
+@use 'shortcodes/logos';
+@use 'shortcodes/social';
+@use 'shortcodes/phones';
+@use 'shortcodes/messengers';
+@use 'shortcodes/showhide';
+
+// WooCommerce
+@use 'woo/woocommerce';
+@use 'woo/woo-icons';
+@use 'woo/view-switcher';
+@use 'woo/page-product';

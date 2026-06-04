@@ -1,0 +1,95 @@
+// Grid System
+// A simplified Bootstrap-like grid using CSS Grid / Flexbox where appropriate,
+// but sticking to standard .container .row .col-* structure for compatibility.
+@use '../variables' as *;
+
+// Container
+.container {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    max-width: $site-max-width;
+
+    &-fluid {
+        width: 100%;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+    }
+}
+
+// Row
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+}
+
+// Columns Common
+@mixin make-col-ready {
+    position: relative;
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+}
+
+// Col-1 through Col-12 Base (Mobile First)
+@for $i from 1 through 12 {
+    .col-#{$i} {
+        @include make-col-ready;
+        flex: 0 0 percentage($i / 12);
+        max-width: percentage($i / 12);
+    }
+}
+
+.col {
+    @include make-col-ready;
+    flex-basis: 0;
+    flex-grow: 1;
+    max-width: 100%;
+}
+
+.col-auto {
+    @include make-col-ready;
+    flex: 0 0 auto;
+    width: auto;
+    max-width: 100%;
+}
+
+// Breakpoints
+$grid-breakpoints: (
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px
+);
+
+@each $breakpoint, $width in $grid-breakpoints {
+    @media (min-width: $width) {
+        .col-#{$breakpoint} {
+            @include make-col-ready;
+            flex-basis: 0;
+            flex-grow: 1;
+            max-width: 100%;
+        }
+
+        .col-#{$breakpoint}-auto {
+            @include make-col-ready;
+            flex: 0 0 auto;
+            width: auto;
+            max-width: 100%;
+        }
+
+        @for $i from 1 through 12 {
+            .col-#{$breakpoint}-#{$i} {
+                @include make-col-ready;
+                flex: 0 0 percentage($i / 12);
+                max-width: percentage($i / 12);
+            }
+        }
+    }
+}

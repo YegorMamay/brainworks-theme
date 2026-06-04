@@ -1,0 +1,55 @@
+@use '../variables' as *;
+
+table {
+    width: 100%;
+    margin-bottom: 16px;
+    color: inherit;
+    background-color: transparent;
+    border-collapse: collapse;
+
+    th,
+    td {
+        padding: 12px;
+        vertical-align: top;
+        border-top: 1px solid $border-color;
+    }
+
+    thead th {
+        vertical-align: bottom;
+        border-bottom: 2px solid $border-color;
+    }
+
+    tbody+tbody {
+        border-top: 2px solid $border-color;
+    }
+}
+
+.table-sm {
+
+    th,
+    td {
+        padding: 5px;
+    }
+}
+
+.table-bordered {
+    border: 1px solid $border-color;
+
+    th,
+    td {
+        border: 1px solid $border-color;
+    }
+
+    thead th,
+    thead td {
+        border-bottom-width: 2px;
+    }
+}
+
+caption {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    color: $text-color;
+    text-align: left;
+    caption-side: bottom;
+}

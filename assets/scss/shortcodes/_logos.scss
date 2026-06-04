@@ -1,0 +1,46 @@
+// Стили логотипов (Main Logo, Second Logo)
+// Используются в шапке и при выводе шорткодов [brainworks_logo], [brainworks_second_logo]
+
+.site-branding {
+	display: flex;
+	align-items: center;
+
+	&__text {
+		font-weight: bold;
+		text-decoration: none;
+		color: inherit;
+	}
+}
+
+// Логотип как ссылка или span (шорткод и шапка)
+.site-logo {
+	display: inline-block;
+	line-height: 0;
+
+	&__img {
+		display: block;
+		height: auto;
+		max-height: 60px;
+		width: auto;
+		object-fit: contain;
+	}
+
+	// В шапке можно ограничить высоту
+	.site-header & .site-logo__img {
+		max-height: 60px;
+	}
+
+	// Второй логотип (например, светлый вариант для подвала)
+	&--second .site-logo__img {
+		// Дополнительные стили при необходимости
+	}
+}
+
+// Обёртка при использовании шорткода в контенте (опционально)
+.brainworks-logo {
+	display: inline-block;
+
+	.site-logo__img {
+		max-height: 120px;
+	}
+}

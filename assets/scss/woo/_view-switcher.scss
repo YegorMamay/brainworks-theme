@@ -1,0 +1,244 @@
+// View-mode switcher styles (grid / list) for WooCommerce shop & category pages
+@use '../variables' as *;
+
+// ---------------------------------------------------------------------------
+// Switcher buttons (placed next to ordering dropdown by WC hook)
+// ---------------------------------------------------------------------------
+.bw-view-switcher {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    margin-left: 12px;
+
+    &__btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 36px;
+        height: 36px;
+        padding: 0;
+        background: transparent;
+        border: 1.5px solid $border-color;
+        border-radius: 6px;
+        color: $text-color;
+        cursor: pointer;
+        transition: background 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+
+        &:hover {
+            border-color: $themeColor1;
+            color: $white;
+        }
+
+        &.is-active {
+            background: $themeColor1;
+            border-color: $themeColor1;
+            color: $white;
+        }
+    }
+}
+
+// ---------------------------------------------------------------------------
+// Shop toolbar: flex container wrapping result-count, ordering & view-switcher
+// ---------------------------------------------------------------------------
+.bw-shop-toolbar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 30px;
+    justify-content: space-between;
+
+    .woocommerce-ordering {
+        order: 1;
+        margin: 0;
+    }
+
+    .woocommerce-result-count {
+        order: 2;
+        margin: 0 0 0 auto;
+        display: none;
+    }
+
+    .bw-view-switcher {
+        order: 3;
+        margin-left: 0;
+    }
+}
+
+// ---------------------------------------------------------------------------
+// GRID MODE (default) — hide list-only elements, make column wrappers transparent
+// ---------------------------------------------------------------------------
+.bw-list-image-col,
+.bw-list-info-col {
+    display: contents; // transparent wrappers — children appear as direct li.product children
+}
+
+// Elements that should only appear in list view
+.bw-featured-badge,
+.bw-list-action,
+.bw-list-short-desc,
+.bw-list-meta {
+    display: none;
+}
+
+// ---------------------------------------------------------------------------
+// LIST VIEW — activated by .woo-list-view class on <body>
+// ---------------------------------------------------------------------------
+.woo-list-view {
+
+    ul.products {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 0;
+
+        li.product {
+            width: 100% !important;
+            float: none !important;
+            display: flex !important;
+            flex-direction: row !important;
+            align-items: stretch;
+            gap: 0;
+            padding: 0;
+            margin-bottom: 24px !important;
+            border: 1px solid $border-color;
+            border-radius: 8px;
+            background: $white;
+            overflow: hidden;
+
+            // Hide the regular (grid) add-to-cart button that WC outputs after </a>
+            // This is the button from woocommerce_after_shop_loop_item p10
+            >a.button,
+            >button.button {
+                display: none !important;
+            }
+
+            // Hide star rating in list view (clutters the layout)
+            .star-rating {
+                display: none;
+            }
+
+            // ── LEFT COLUMN: image + action button ──────────────────────────
+
+            .bw-list-image-col {
+                display: flex !important;
+                flex-direction: column;
+                flex-shrink: 0;
+                width: 300px;
+                background: $themeColor5;
+                position: relative;
+
+                // Product thumbnail link / image
+                a:has(img),
+                >a {
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    flex: 1;
+                    padding: 24px 24px 12px;
+                }
+
+                img.wp-post-image,
+                img.attachment-woocommerce_thumbnail {
+                    width: 100%;
+                    height: auto;
+                    object-fit: contain;
+                    display: block;
+                    margin: 0;
+                }
+
+                // Featured badge
+                .bw-featured-badge {
+                    display: block !important;
+                    position: absolute;
+                    top: 12px;
+                    left: 0;
+                    background: $themeColor1;
+                    color: $white;
+                    font-size: 12px;
+                    font-weight: 600;
+                    padding: 3px 12px 3px 10px;
+                    border-radius: 0 4px 4px 0;
+                    z-index: 1;
+                    line-height: 1.5;
+                }
+
+                // Sale flash badge
+                .onsale {
+                    top: 10px;
+                    right: 7px;
+                }
+
+
+            }
+
+            // ── RIGHT COLUMN: product info ───────────────────────────────────
+            .bw-list-info-col {
+                display: flex !important; // override parent `display: contents`
+                flex-direction: column;
+                flex: 1;
+                padding: 24px 28px;
+
+                // Product title
+                .woocommerce-loop-product__title {
+                    font-size: 1.6rem;
+                    font-weight: 700;
+                    margin-bottom: 12px;
+                    color: $text-color;
+                    line-height: 1.2;
+                }
+
+                // Short description
+                .bw-list-short-desc {
+                    display: block !important;
+                    color: $themeColor1;
+                    font-size: 0.92rem;
+                    line-height: 1.6;
+                    margin-bottom: 16px;
+                }
+
+                // Meta row: SKU, categories, tags
+                .bw-list-meta {
+                    display: flex !important;
+                    flex-wrap: wrap;
+                    gap: 12px 20px;
+                    font-size: 0.875rem;
+                    color: $text-color;
+                    margin-bottom: 16px;
+
+                    span {
+                        display: inline-flex;
+                        align-items: center;
+                        gap: 4px;
+                    }
+
+                    a {
+                        color: inherit;
+                        text-decoration: none;
+
+                        &:hover {
+                            text-decoration: underline;
+                        }
+                    }
+                }
+
+                // Price
+                .price {
+                    font-size: 1.5rem !important;
+                    font-weight: 700;
+                    color: $themeColor2 !important;
+                    margin-top: auto;
+                }
+
+                // Add to cart button — below the price
+                .bw-list-action {
+                    display: block !important;
+                    margin-top: 16px;
+
+                    .button,
+                    a.button {
+                        display: inline-block !important;
+                    }
+                }
+            }
+        }
+    }
+}

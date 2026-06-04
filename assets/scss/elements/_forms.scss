@@ -1,0 +1,220 @@
+// _forms.scss
+// Styles for forms, inputs, buttons, etc.
+
+@use '../variables' as *;
+
+// Variables are now in _variables.scss
+
+/* Common form controls */
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="url"],
+input[type="tel"],
+input[type="number"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+input[type="datetime-local"],
+input[type="month"],
+input[type="week"],
+textarea,
+select {
+    display: block;
+    width: 100%;
+    height: $input-height;
+    padding: $input-padding-y $input-padding-x;
+    font-size: $input-font-size;
+    font-weight: 400;
+    line-height: $input-line-height;
+    color: $input-color;
+    background-color: $input-bg;
+    background-clip: padding-box;
+    border: 1px solid $input-border-color;
+    border-radius: $input-border-radius;
+    transition: $input-transition;
+
+    // Remove default appearance
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    &:focus {
+        color: $input-color;
+        background-color: $input-bg;
+        border-color: $input-border-color; // Keep original border color
+        outline: none;
+        box-shadow: none;
+    }
+
+    &::placeholder {
+        color: $input-placeholder-color;
+        opacity: 1;
+    }
+
+    &:disabled,
+    &[readonly] {
+        background-color: $input-bg-disabled;
+        opacity: 1;
+    }
+}
+
+/* Textarea specific */
+textarea {
+    height: auto;
+    min-height: 60px;
+    resize: vertical;
+}
+
+/* Select specific */
+select {
+    padding-right: 28px; // Space for arrow
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23343a40' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    background-size: 16px 12px;
+
+    &[multiple],
+    &[size]:not([size="1"]) {
+        height: auto;
+        padding-right: $input-padding-x;
+        background-image: none;
+    }
+}
+
+/* Checkboxes and Radios */
+input[type="checkbox"],
+input[type="radio"] {
+    box-sizing: border-box;
+    padding: 0;
+    margin-right: 8px;
+}
+
+/* Fieldset and Legend */
+fieldset {
+    min-width: 0;
+    padding: 0;
+    margin: 0;
+    border: 0;
+}
+
+legend {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    padding: 0;
+    margin-bottom: 8px;
+    font-size: 24px;
+    line-height: inherit;
+    color: inherit;
+    white-space: normal;
+}
+
+/* Labels */
+label {
+    display: inline-block;
+    margin-bottom: 8px;
+    font-weight: bold;
+}
+
+/* Buttons */
+button,
+input[type="button"],
+input[type="reset"],
+input[type="submit"] {
+    display: inline-block;
+    font-weight: 400;
+    color: $btn-primary-color;
+    text-align: center;
+    vertical-align: middle;
+    user-select: none;
+    background-color: $btn-primary-bg;
+    border: 1px solid $btn-primary-border;
+    padding: $btn-padding-y $btn-padding-x;
+    font-size: $btn-font-size;
+    line-height: $btn-line-height;
+    border-radius: $btn-border-radius;
+    transition: $btn-transition;
+    cursor: pointer;
+
+    &:hover {
+        color: $btn-primary-color;
+        background-color: $btn-primary-hover-bg;
+        border-color: $btn-primary-hover-border;
+        text-decoration: none;
+    }
+
+    &:focus {
+        outline: none;
+        box-shadow: none;
+    }
+
+    &:disabled {
+        opacity: 0.65;
+        cursor: not-allowed;
+    }
+
+    &:not(:disabled):not(.disabled):active {
+        color: $btn-primary-color;
+        background-color: $btn-primary-hover-border;
+        border-color: $btn-primary-hover-border;
+    }
+}
+
+/* File input */
+input[type="file"] {
+    display: block;
+    width: 100%;
+    padding: $input-padding-y $input-padding-x;
+    background: none;
+    border: none;
+    height: auto;
+}
+
+/* Range input */
+input[type="range"] {
+    display: block;
+    width: 100%;
+    height: calc(16px + 6px);
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    appearance: none;
+
+    &:focus {
+        outline: none;
+    }
+
+    &::-webkit-slider-thumb {
+        width: 16px;
+        height: 16px;
+        margin-top: -4px;
+        background-color: $btn-primary-bg;
+        border: 0;
+        border-radius: 16px;
+        transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+        appearance: none;
+
+        &:active {
+            background-color: $btn-primary-hover-bg;
+        }
+    }
+
+    &::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 8px;
+        color: transparent;
+        cursor: pointer;
+        background-color: $border-color;
+        border-color: transparent;
+        border-radius: 16px;
+    }
+}
+
+.search-form {
+    display: flex;
+
+    label {
+        margin: 0 10px 0 0;
+    }
+}

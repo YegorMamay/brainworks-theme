@@ -1,0 +1,50 @@
+//@include media-breakpoint-up(md) {}   — сработает на 768px: больше или равно md)
+//@include media-breakpoint-down(md) {} — сработает на 767.98px и все что меньше md
+
+// Breakpoints
+$grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 768px,
+    lg: 992px,
+    xl: 1200px,
+    xxl: 1400px) !default;
+
+@mixin media-breakpoint-down($name, $breakpoints: $grid-breakpoints) {
+    $max: breakpoint-max($name, $breakpoints
+    );
+
+@if $max {
+    @media (max-width: $max) {
+        @content;
+    }
+}
+
+@else {
+    @content;
+}
+}
+
+@function breakpoint-max($name, $breakpoints: $grid-breakpoints) {
+    $max: map-get($breakpoints, $name);
+    @return if($max and $max > 0, $max - 0.02, null);
+}
+
+// Функция для получения минимальной ширины брейкпоинта (для media-breakpoint-up)
+@function breakpoint-min($name, $breakpoints: $grid-breakpoints) {
+    $min: map-get($breakpoints, $name);
+    @return if($min != 0, $min, null);
+}
+
+// Миксин media-breakpoint-up: применяет стили для экранов больше или равных брейкпоинту (min-width)
+@mixin media-breakpoint-up($name, $breakpoints: $grid-breakpoints) {
+    $min: breakpoint-min($name, $breakpoints);
+
+    @if $min {
+        @media (min-width: $min) {
+            @content;
+        }
+    } @else {
+        @content;
+    }
+}

@@ -1,0 +1,68 @@
+@use '../variables' as *;
+@use '../mixins' as *;
+
+.show-hide-block {
+  margin: 1.5rem 0;
+  position: relative;
+
+  .show-hide-content {
+    max-height: var(--show-hide-height, 120px);
+    overflow: hidden;
+    position: relative;
+    transition: max-height 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+    // Fade overlay
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: linear-gradient(to bottom, rgba($white, 0), $white);
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      opacity: 1;
+      z-index: 2;
+    }
+
+    &.no-fade::after {
+      display: none;
+    }
+  }
+
+  &.is-expanded {
+    .show-hide-content {
+      &::after {
+        opacity: 0;
+      }
+    }
+  }
+
+  .show-hide-button-wrap {
+    text-align: center;
+    margin-top: 10px;
+  }
+
+  .show-hide-button {
+    background: none;
+    border: none;
+    color: #b12d3c; // Adjusted to match the screenshot's red tone
+    font-weight: 700;
+    font-size: 1.125rem;
+    cursor: pointer;
+    padding: 8px 16px;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    display: inline-block;
+
+    &:hover {
+      opacity: 0.8;
+      text-decoration: underline;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

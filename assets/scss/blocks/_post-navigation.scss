@@ -1,0 +1,118 @@
+@use '../variables' as *;
+
+.post-navigation {
+    margin: 48px 0;
+    font-family: inherit;
+
+    .nav-links {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 24px;
+    }
+
+    .nav-previous,
+    .nav-next {
+        flex: 1;
+        min-width: 200px;
+    }
+
+    .nav-previous {
+        text-align: left;
+    }
+
+    .nav-next {
+        text-align: right;
+    }
+
+    a {
+        display: inline-flex;
+        align-items: center;
+        padding: 16px 24px;
+        background-color: $themeColor5;
+        border: 1px solid $border-color;
+        border-radius: 4px;
+        color: $text-color;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        line-height: 1.4;
+        font-weight: 500;
+        width: 100%; // Make the whole block clickable/fill space
+        justify-content: center; // Center content if it wraps, or specific alignment
+
+        &:hover {
+            background-color: $white;
+            border-color: $border-color;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+            color: $black;
+            transform: translateY(-2px);
+        }
+    }
+
+    // Specific alignment for text/arrows inside the link
+    .nav-previous a {
+        justify-content: flex-start;
+    }
+
+    .nav-next a {
+        justify-content: flex-end;
+    }
+
+    // Arrow styling (assuming they are text in the link)
+    // If the arrows are separate elements, we depend on PHP structure.
+    // Base on single.php: 'prev_text' => '&larr; ' ...
+}
+
+nav.pagination,
+.pagination {
+    margin: 40px 0;
+
+    .nav-links {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .page-numbers {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+        padding: 0 12px;
+        border: 1px solid var(--border-color, #e2e8f0);
+        border-radius: 4px;
+        background-color: $white;
+        color: $text-color;
+        font-weight: 500;
+        text-decoration: none;
+        transition: all 0.3s ease;
+
+        &:hover,
+        &:focus {
+            background-color: var(--theme-color-1, #159A9C);
+            color: $white;
+            border-color: var(--theme-color-1, #159A9C);
+        }
+
+        &.current {
+            background-color: var(--theme-color-1, #159A9C);
+            color: $white;
+            border-color: var(--theme-color-1, #159A9C);
+            pointer-events: none;
+        }
+
+        &.dots {
+            border: none;
+            background: transparent;
+            pointer-events: none;
+        }
+    }
+
+    .screen-reader-text {
+        display: none;
+    }
+}

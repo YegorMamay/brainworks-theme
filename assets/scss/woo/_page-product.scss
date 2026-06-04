@@ -1,0 +1,9 @@
+@use 'variables' as *;
+
+.summary {
+    .price {
+        margin-bottom: 30px;
+        font-size: 30px !important;
+        font-weight: bold;
+    }
+}

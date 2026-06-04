@@ -1,0 +1,304 @@
+// Стили шорткода [woo_icons] — иконки кабинета и корзины WooCommerce
+@use '../variables' as *;
+
+.woo-icons {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+
+    // Общий стиль одного элемента (иконка-кнопка)
+    &__item {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        text-decoration: none;
+        color: inherit;
+        transition: opacity 0.2s ease;
+
+        &:hover {
+            opacity: 0.75;
+        }
+    }
+
+    // Круглая обводка вокруг SVG-иконки
+    &__icon-wrap {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 44px;
+        height: 44px;
+        border-style: solid;
+        border-width: 1.5px; // overridden by Customizer inline CSS
+        border-color: currentColor; // overridden by Customizer inline CSS
+        border-radius: 50%;
+        flex-shrink: 0;
+
+        svg {
+            display: block;
+            width: 22px;
+            height: 22px;
+            fill: none;
+            stroke: currentColor;
+            stroke-width: 1.5;
+            stroke-linecap: round;
+            stroke-linejoin: round;
+        }
+    }
+
+    // Бейдж с количеством товаров
+    &__badge {
+        position: absolute;
+        top: -4px;
+        right: -4px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 18px;
+        height: 18px;
+        padding: 0 3px;
+        font-size: 10px;
+        font-weight: 700;
+        line-height: 1;
+        color: $white;
+        background: $themeColor2;
+        border-radius: 50%;
+        pointer-events: none;
+
+        &:empty,
+        &[data-count="0"] {
+            display: none;
+        }
+    }
+
+    // Текстовая часть (Кошик / сумма)
+    &__label {
+        display: flex;
+        flex-direction: column;
+        font-size: 14px;
+        line-height: 1.2;
+        color: inherit;
+
+        strong {
+            font-size: 15px;
+        }
+    }
+
+    // Модификатор: скрыть текст (только иконки)
+    &--icons-only &__label {
+        display: none;
+    }
+
+    // -----------------------------------------------------------------------
+    // Обёртка корзины (позиционирование попапа)
+    // -----------------------------------------------------------------------
+    &__cart-wrapper {
+        position: relative;
+
+        // Показываем попап при ховере на обёртку или самом попапе
+        &:hover .woo-icons__cart-popup,
+        .woo-icons__cart-popup:hover {
+            opacity: 1;
+            pointer-events: auto;
+            transform: translateY(0);
+            visibility: visible;
+        }
+
+        // Невидимый мост — заполняет зазор между иконкой и попапом,
+        // чтобы курсор не «выходил» из ховера при движении вниз к попапу.
+        &::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: -20px;
+            right: -20px;
+            height: 12px; // должен перекрывать зазор до попапа
+        }
+    }
+
+    // -----------------------------------------------------------------------
+    // Попап мини-корзины
+    // -----------------------------------------------------------------------
+    &__cart-popup {
+        position: absolute;
+        top: calc(100% + 4px); // минимальный зазор, перекрытый ::after-мостом
+        right: 0;
+        z-index: 9999;
+        width: 300px;
+        background: $white;
+        border: 1px solid $border-color;
+        border-radius: 8px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
+        padding: 0;
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transform: translateY(8px);
+        transition:
+            opacity 0.2s ease,
+            transform 0.2s ease,
+            visibility 0.2s ease;
+
+        // Маленький треугольник-стрелка вверх
+        &::before {
+            content: '';
+            position: absolute;
+            top: -6px;
+            right: 16px;
+            width: 12px;
+            height: 6px;
+            background: $white;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
+            filter: drop-shadow(0 -1px 0 $border-color);
+        }
+
+        // ----------------------------------------------------------------
+        // Список товаров
+        // ----------------------------------------------------------------
+        .woocommerce-mini-cart {
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            max-height: 280px;
+            overflow-y: auto;
+
+            // Один товар
+            &-item {
+                display: flex;
+                align-items: flex-start;
+                gap: 8px;
+                padding: 12px 16px;
+                border-bottom: 1px solid $border-color;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                // Кнопка удаления (×)
+                .remove_from_cart_button {
+                    flex-shrink: 0;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    width: 20px;
+                    height: 20px;
+                    font-size: 14px;
+                    color: $themeColor2;
+                    text-decoration: none;
+                    line-height: 1;
+                    border-radius: 50%;
+                    transition: background 0.15s ease;
+
+                    &:hover {
+                        background: lighten($themeColor2, 30%);
+                    }
+                }
+
+                // Изображение товара (мини) — скрываем, как на скриншоте
+                a img {
+                    display: none;
+                }
+
+                // Название товара
+                >a:not(.remove_from_cart_button) {
+                    flex: 1;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: $text-color;
+                    text-decoration: none;
+                    line-height: 1.3;
+
+                    &:hover {
+                        color: $themeColor1;
+                    }
+                }
+
+                // «1 × 1800 грн.»
+                .quantity {
+                    display: block;
+                    font-size: 13px;
+                    color: $themeColor2;
+                    font-weight: 400;
+                    margin-top: 2px;
+                }
+
+                // Блок количества справа
+                >span:not(.remove_from_cart_button) {
+                    flex-shrink: 0;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    min-width: 32px;
+                    height: 32px;
+                    border-radius: 4px;
+                    font-size: 14px;
+                    font-weight: 600;
+                    color: $text-color;
+                }
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // Итог «Разом:»
+        // ----------------------------------------------------------------
+        .woocommerce-mini-cart__total {
+            margin: 0;
+            padding: 14px 16px;
+            text-align: center;
+            font-size: 15px;
+            color: $text-color;
+            border-bottom: 1px solid $border-color;
+
+            strong {
+                font-weight: 700;
+                color: $themeColor2;
+            }
+
+            .amount {
+                font-weight: 700;
+                color: $themeColor2;
+            }
+        }
+
+        // ----------------------------------------------------------------
+        // Кнопки «Переглянути кошик» / «Оформлення замовлення»
+        // ----------------------------------------------------------------
+        .woocommerce-mini-cart__buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            padding: 14px 16px;
+            margin: 0;
+
+            a.button,
+            a.button.wc-forward,
+            a.checkout {
+                display: block;
+                width: 100%;
+                padding: 10px 16px;
+                border-radius: 6px;
+                text-align: center;
+                font-size: 14px;
+                font-weight: 600;
+                text-decoration: none;
+                letter-spacing: 0.01em;
+                transition: filter 0.15s ease;
+                background: $themeColor1;
+                color: $white;
+                border: none;
+
+                &:hover {
+                    filter: brightness(1.12);
+                }
+            }
+        }
+
+        // Пустая корзина
+        .woocommerce-mini-cart__empty-message {
+            padding: 20px 16px;
+            text-align: center;
+            color: $text-color;
+            font-size: 14px;
+        }
+    }
+}

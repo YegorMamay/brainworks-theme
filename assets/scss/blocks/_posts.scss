@@ -1,0 +1,130 @@
+// Posts loop styling (archive, home, index)
+.archive, .blog, .home, .search {
+    article.post {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        margin-bottom: 40px;
+        padding-bottom: 40px;
+        border-bottom: 1px solid var(--border-color, #e2e8f0);
+
+        // Two-column grid layout for posts with thumbnails
+        &.has-post-thumbnail {
+            .entry-thumbnail {
+                width: 100%;
+                margin-bottom: 20px;
+
+                @media (min-width: 768px) {
+                    width: 50%;
+                    padding-right: 20px;
+                    margin-bottom: 0;
+                }
+
+                img {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 8px;
+                    object-fit: cover;
+                    aspect-ratio: 16 / 10;
+                }
+            }
+
+            .entry-content-wrap {
+                width: 100%;
+
+                @media (min-width: 768px) {
+                    width: 50%;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: flex-start;
+                    min-height: 100%;
+                }
+            }
+        }
+
+        // Full width when no thumbnail exists
+        &:not(.has-post-thumbnail) .entry-content-wrap {
+            width: 100%;
+        }
+
+        .entry-header {
+            margin-bottom: 15px;
+
+            .entry-title {
+                margin-top: 0;
+                margin-bottom: 8px;
+                font-size: 24px;
+                line-height: 1.25;
+
+                a {
+                    color: inherit;
+                    text-decoration: none;
+
+                    &:hover {
+                        color: var(--theme-color-1);
+                    }
+                }
+            }
+
+            .entry-meta {
+                font-size: 14px;
+                color: #64748b;
+            }
+        }
+
+        .entry-summary {
+            margin-bottom: 15px;
+            color: #475569;
+            line-height: 1.6;
+
+            p:last-child {
+                margin-bottom: 0;
+            }
+        }
+
+        .entry-read-more {
+            margin-top: auto;
+        }
+    }
+}
+
+// Single Post specific styling
+.single-post {
+    article.post {
+        margin-bottom: 40px;
+
+        .entry-header {
+            margin-bottom: 20px;
+
+            .entry-title {
+                font-size: 32px;
+                margin-bottom: 10px;
+            }
+
+            .entry-meta {
+                margin-bottom: 15px;
+                font-size: 14px;
+                color: #64748b;
+            }
+        }
+
+        .entry-thumbnail {
+            margin-bottom: 30px;
+
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 8px;
+            }
+        }
+
+        .entry-content {
+            line-height: 1.8;
+            font-size: 18px;
+
+            p {
+                margin-bottom: 1.5em;
+            }
+        }
+    }
+}

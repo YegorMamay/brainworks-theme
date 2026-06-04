@@ -1,0 +1,108 @@
+// Кнопка «Наверх» * See also: inc/enqueues.php, assets/js/scroll-to-top.js
+@use '../variables' as *;
+
+.scroll-to-top {
+	position: fixed;
+	z-index: 1000;
+	bottom: 24px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 48px;
+	height: 48px;
+	padding: 0;
+	border: none;
+	background: $text-color;
+	color: $white;
+	text-decoration: none;
+	cursor: pointer;
+	opacity: 0;
+	visibility: hidden;
+	transition: opacity 0.25s, visibility 0.25s, background-color 0.2s;
+
+	&:hover {
+		background: $black;
+		color: $white;
+	}
+
+	&:focus {
+		outline: 2px solid currentColor;
+		outline-offset: 2px;
+	}
+
+	&--visible {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	// Положение
+	&--bottom-right {
+		right: 24px;
+		left: auto;
+	}
+
+	&--bottom-left {
+		left: 24px;
+		right: auto;
+	}
+
+	// Форма кнопки
+	&--circle {
+		border-radius: 50%;
+	}
+
+	&--square {
+		border-radius: 0;
+	}
+
+	&--rounded {
+		border-radius: 8px;
+	}
+
+	// Размер
+	&--small {
+		width: 40px;
+		height: 40px;
+		bottom: 16px;
+
+		.scroll-to-top__arrow--default svg {
+			width: 20px;
+			height: 20px;
+		}
+	}
+
+	&--medium {
+		width: 48px;
+		height: 48px;
+	}
+
+	&--large {
+		width: 56px;
+		height: 56px;
+		bottom: 24px;
+
+		.scroll-to-top__arrow--default svg {
+			width: 28px;
+			height: 28px;
+		}
+	}
+
+	&__arrow {
+		display: block;
+		width: 24px;
+		height: 24px;
+		object-fit: contain;
+	}
+
+	&__arrow--default {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		line-height: 0;
+
+		svg {
+			width: 24px;
+			height: 24px;
+		}
+	}
+}

@@ -1,0 +1,72 @@
+// Страница входа и регистрации (Frontend Auth)
+
+.auth-page {
+	&__main {
+		width: 100%;
+	}
+
+	&__content {
+		max-width: 1000px;
+		margin: 0 auto;
+	}
+
+	&__grid {
+		display: grid;
+		grid-template-columns: 1fr 1fr;
+		gap: 24px;
+		margin-top: 24px;
+	}
+
+	&__notice {
+		padding: 12px 16px;
+		border-radius: 4px;
+		margin-bottom: 16px;
+
+		ul {
+			margin: 0;
+			padding-left: 18px;
+		}
+
+		&--error {
+			background: #fdecea;
+			color: #6d1f1f;
+			border: 1px solid #f5c2c0;
+		}
+
+		&--success {
+			background: #eaf7ed;
+			color: #1d5f2a;
+			border: 1px solid #b8e1c1;
+		}
+	}
+}
+
+.auth-card {
+	padding: 20px;
+	border: 1px solid #B4BEC9;
+	border-radius: 8px;
+	background: #ffffff;
+
+	h2 {
+		margin-top: 0;
+		margin-bottom: 16px;
+	}
+}
+
+.auth-form {
+	p {
+		margin-bottom: 12px;
+	}
+
+	&__remember input[type='checkbox'] {
+		width: auto;
+		height: auto;
+		margin-right: 6px;
+	}
+}
+
+@media (max-width: 768px) {
+	.auth-page__grid {
+		grid-template-columns: 1fr;
+	}
+}

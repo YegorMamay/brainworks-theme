@@ -1,0 +1,42 @@
+@use '../variables' as *;
+
+.entry-content {
+
+    ul,
+    ol {
+        margin: 0 0 24px 24px;
+        padding: 0;
+    }
+
+    ul {
+        list-style: disc;
+    }
+
+    ol {
+        list-style: decimal;
+    }
+
+    li {
+        margin-bottom: 8px;
+    }
+
+    ul ul,
+    ol ul,
+    ul ol,
+    ol ol {
+        margin-bottom: 0;
+    }
+}
+
+dl {
+    margin-bottom: 24px;
+}
+
+dt {
+    font-weight: bold;
+}
+
+dd {
+    margin-bottom: 8px;
+    margin-left: 0;
+}

@@ -1,0 +1,50 @@
+// Базовые стили: типографика, контейнер сайта, общая вёрстка
+
+@use 'variables' as *;
+
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	margin: 0;
+	font-family: $font-family-base;
+	line-height: $line-height-base;
+	min-height: 100vh;
+	display: flex;
+	flex-direction: column;
+}
+
+.site {
+	max-width: $site-max-width;
+	margin: 0 auto;
+	padding: $site-padding 0;
+	width: 100%;
+	box-sizing: border-box;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+
+	// На мобильных — боковой отступ, чтобы контент не прилипал к краям
+	@media (max-width: 768px) {
+		padding: $site-padding;
+	}
+}
+
+.site-main {
+	// Контейнер основного контента
+}
+
+.container {
+	max-width: $site-max-width;
+	margin: 0 auto;
+	padding: 0 $site-padding;
+	width: 100%;
+	box-sizing: border-box;
+}
